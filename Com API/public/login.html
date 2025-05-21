@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - OlivGuard</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/login.css">
+  <link rel="shortcut icon" type="imagex/png" href="../assets/imgs/icons/icons8-oliva-50.png" />
+</head>
+
+<body>
+  <header>
+    <a href="index.html">
+      <img src="../assets/img/logoOlivGuard 1.png" alt="" srcset="" />
+    </a>
+
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="simulador.html">Simulador Financeiro</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="esquerda">
+      <div class="container">
+        <h1>Faça seu login</h1>
+
+        <div class="containerInputs">
+          <input type="text" id="input_email" oninput="analisar()" placeholder="E-mail" />
+          <input type="password" id="input_senha" placeholder="Senha"/>
+        </div>
+
+        <div id="div_mensagem"></div>
+
+        <button onclick="entrar()">
+          Entrar
+        </button>
+      </div>
+    </section>
+
+    <section class="direita">
+      <div class="container">
+        <img src="../assets/img/logoOlivGuard 2.svg" alt="" srcset="" />
+        <h3>Ainda não tem uma conta? Crie a sua e junte-se a nós nessa jornada.</h3>
+        <button onclick="cadastro()">
+          Cadastre-se
+        </button>
+      </div>
+    </section>
+  </main>
+
+<script>
+function cadastro(){
+    window.location.href = "./cadastro.html";
+  }
+    function entrar() {
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+            
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/dashboard.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>

@@ -1,0 +1,132 @@
+.banner {
+  width: 100%;
+  height: 80vh;
+  background-color: var(--verdeContraste);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner .container {
+  display: flex;
+  align-items: center;
+}
+
+.container h1 {
+  width: 650px;
+  color: #fff;
+  font-size: 4rem;
+  margin-left: 150px;
+}
+
+.banner .container {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #04222200 60%, #042222 100%),
+    url("../assets/img/banner.png") no-repeat center center;
+  background-size: cover;
+}
+
+.cards {
+  background-color: var(--verdeEscuro);
+  width: 100%;
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#cards {
+  position: relative;
+  padding-top: 10vh;
+  margin-top: -10vh;
+}
+
+.card {
+  background-color: var(--verdeClaro);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 27%;
+  height: 34vh;
+  border-radius: 15px;
+  padding: 15px;
+  gap: 10px;
+}
+
+.containerIcone {
+  position: relative;
+  top: -55px;
+  background-color: #fff;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.containerIcone img {
+  width: 55px;
+  height: auto;
+}
+
+.card h2 {
+  margin-top: -45px;
+}
+
+.produto {
+  width: 100%;
+  height: 85vh;
+  padding: 70px 0;
+  background-color: var(--verdeEscuro);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.imagemExemplo {
+  width: 40%;
+  height: 40vh;
+}
+
+.imagemExemplo img{
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+
+.nossoProduto {
+  width: 50%;
+  height: fit-content;
+  padding: 10px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.nossoProduto h1 {
+  font-size: 2.5rem;
+}
+
+.nossoProduto p {
+  font-size: 1.5rem;
+  margin-top: 20px;
+}
+
+.botoes {
+  align-self: flex-end;
+}
+
+.botoes a {
+  color: #fff;
+  background-color: var(--verdeClaro);
+  border: none;
+  border-radius: 10px;
+  padding: 15px 20px;
+  width: fit-content;
+  text-decoration: none;
+  margin-left: 10px;
+  font-size: 1.2rem;
+}

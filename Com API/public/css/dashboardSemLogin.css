@@ -1,0 +1,39 @@
+:root {
+    --verdeEscuro: #042222;
+    --verdeClaro: #a5ce0c;
+    --areiaSuave: #f2f0e6;
+    --verdeContraste: #092b2c;
+    --fundoClaro: #e6e6e6;
+    --vermelhoEscuro: #750000;
+    --vermelhoClaroTransparente: #bb000041;
+  }
+
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 75vh;
+    background-color: #fff;
+}
+
+.alerta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40vw;
+    height: 50vh;
+    background-color: var(--vermelhoClaroTransparente);
+    border-radius: 15px;
+    border: 2px solid var(--vermelhoEscuro);
+    padding: 15px;
+    gap: 20px;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}

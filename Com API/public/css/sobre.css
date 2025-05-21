@@ -1,0 +1,27 @@
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
+}
+
+.container{
+    width: 70%;
+    height: fit-content;
+    font-size: 1.3rem;
+    padding: 0px 40px 40px 40px;
+    margin: 20px;
+    border-radius: 10px;
+    text-align: justify;
+    padding-bottom: 15px;
+    background-color: #E6F1ED;
+}
+
+h1{
+    margin: 20px 0;
+}
+
+p{
+    margin-bottom: 15px;
+}

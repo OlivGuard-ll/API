@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OlivGuard</title>
+    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="shortcut icon"
+      type="imagex/png"
+      href="../assets/icons/icons8-oliva-50.png"
+    />
+  </head>
+  <body>
+    <header>
+      <a href="index.html">
+        <img src="../assets/img/logoOlivGuard 1.png" alt="Logo OlivGuard" />
+      </a>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="simulador.html">Simulador Financeiro</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="banner">
+        <div class="container">
+          <h1>Monitore sua plantação de oliveiras</h1>
+        </div>
+      </section>
+
+      <section class="cards" id="cards">
+        <div class="card">
+          <div class="containerIcone">
+            <img src="../assets/icons/flor2.svg" alt="Ícone flor" />
+          </div>
+          <h2>Monitoramento</h2>
+          <p>
+            Nossa empresa realiza o monitoramento capacitivo do solo para
+            otimizar a irrigação das oliveiras, prevenindo o estresse hídrico e
+            aumentando a produtividade de forma sustentável.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="containerIcone">
+            <img src="../assets/icons/qualidade.svg" alt="Ícone qualidade" />
+          </div>
+          <h2>Qualidade</h2>
+          <p>
+            A OlivGuard oferece tecnologia de ponta para o monitoramento do solo
+            em plantações de oliveiras, garantindo precisão, eficiência e
+            sustentabilidade no cultivo.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="containerIcone">
+            <img src="../assets/icons/sustentavel.svg" alt="Ícone sustentável" />
+          </div>
+          <h2>Sustentabilidade</h2>
+          <p>
+            A OlivGuard promove a sustentabilidade ao otimizar a irrigação com
+            monitoramento preciso do solo, reduzindo desperdícios e incentivando
+            uma agricultura ecológica.
+          </p>
+        </div>
+      </section>
+
+      <section class="produto" id="produto">
+        <div class="imagemExemplo">
+          <img src="../assets/img/arduino.jpeg" alt="" srcset="">
+        </div>
+
+        <div class="nossoProduto">
+          <div class="textos">
+            <h1>Conheça nosso produto</h1>
+            <p>
+              A OlivGuard oferece soluções IoT para o monitoramento do solo em
+              plantações de oliveiras, fornecendo dados em tempo real e gráficos
+              detalhados para otimizar sua produção. Com foco em
+              sustentabilidade e eficiência, nossa tecnologia ajuda os
+              produtores a tomarem decisões precisas e a reduzirem o desperdício
+              de safras, promovendo uma agricultura responsável e eficaz.
+            </p>
+          </div>
+          <div class="botoes">
+            <a href="sobre.html">Saiba mais</a>
+            <a href="simulador.html">Simulador financeiro</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <form action="">
+        <label for="input_nome">Nome:</label>
+        <input type="text" id="input_nome" />
+
+        <label for="input_email">E-mail:</label>
+        <input type="text" id="input_email" />
+
+        <label for="input_mensagem">Mensagem:</label>
+        <input type="text" id="input_mensagem" />
+
+        <button>Enviar</button>
+      </form>
+
+      <div class="faleConosco">
+        <h1>Fale conosco</h1>
+        <p>
+          Estamos aqui para ajudar! Se você tiver dúvidas, sugestões ou precisar
+          de mais informações sobre os nossos serviços de monitoramento de solo,
+          entre em contato conosco. Preencha o formulário ao lado e nossa equipe
+          retornará o mais breve possível. A OlivGuard valoriza seu feedback e
+          está sempre à disposição para atender às suas necessidades.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<script>
+  function validar() {
+    var tele = input_telefone.value.replace(/\D/g, "");
+    var caracterAtual = "(";
+    for (var i = 0; i < tele.length; i++) {
+      caracterAtual += tele[i];
+      if (i == 1) {
+        caracterAtual += ") ";
+      } else if (i == 6) {
+        caracterAtual += "-";
+      }
+      input_telefone.value = caracterAtual;
+    }
+  }
+</script>

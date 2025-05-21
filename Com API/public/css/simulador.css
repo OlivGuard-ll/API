@@ -1,0 +1,139 @@
+:root {
+  --verdeEscuro: #042222;
+  --verdeClaro: #a5ce0c;
+  --verdeContraste: #092b2c;
+  --verdeFundo: #153535;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  max-height: fit-content;
+  background-color: var(--verdeFundo);
+  color: #fff;
+  padding: 50px 0;
+  gap: 15px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.perguntas h1 {
+  margin-bottom: 20px;
+}
+
+.pergunta {
+  width: 30vw;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  height: 40px;
+  padding-left: 10px;
+  border-radius: 5px;
+  outline: none;
+  background-color: var(--verdeEscuro);
+  border: 2px solid #fff;
+  color: #fff;
+  transition: 0.3s;
+}
+
+input:focus {
+  border: 2px solid var(--verdeClaro);
+  scale: 1.03;
+}
+
+button {
+  width: 100%;
+  padding: 10px 0;
+  background-color: var(--verdeClaro);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 25px;
+}
+button:hover {
+  scale: 1.03;
+}
+
+#res {
+  width: 60vw;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  background-color: var(--verdeContraste);
+  color: #fff;
+  border: 1px solid #ffffff55;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.1); 
+}
+
+thead {
+  background-color: transparent;
+  background-image: linear-gradient(135deg, var(--verdeClaro), #cbe949);
+  color: #042222;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 15px;
+  border: 1px solid #ffffff33;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #0f2f2f;
+}
+
+tbody tr:hover {
+  background-color: #1a3b3a;
+  transition: 0.3s;
+}
+
+#res2,
+#res3 {
+  background-color: var(--verdeContraste);
+  color: #fff;
+  padding: 25px;
+  margin: 20px 0;
+  border-radius: 10px;
+  border: 1px solid #ffffff55;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  line-height: 1.6;
+  font-size: 1rem;
+  width: 60vw;
+}
+
+#res2 b,
+#res3 b,
+#res3 strong {
+  color: var(--verdeClaro);
+}
+
+#res2 strong,
+#res3 strong {
+  font-weight: bold;
+}
+
+#res,
+#res2,
+#res3 {
+  display: none;
+}

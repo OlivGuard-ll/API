@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial;
+}
+
+/* Barra de rolagem do body */
+::-webkit-scrollbar {
+  width: 10px; /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--verdeContraste); /* Cor de fundo do "trilho" */
+  
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--verdeClaro); /* Cor da "barra" da barra de rolagem */
+  border-radius: 10px; /* Bordas arredondadas da "barra" */
+  border: 2px solid #0f2f2f; /* Cor da borda da barra */
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+  --verdeEscuro: #042222;
+  --verdeClaro: #a5ce0c;
+  --verdeContraste: #092b2c;
+}
+
+header {
+  width: 100%;
+  height: 10vh;
+  background-color: var(--verdeEscuro);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: #fff;
+  font-weight: bolder;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 50px;
+}
+
+ul a {
+  text-decoration: none;
+  color: #fff;
+  transition: .4s;
+}
+
+ul a:hover{
+  color: var(--verdeClaro);
+}
+
+footer {
+  background-color: var(--verdeContraste);
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: space-around;
+  padding: 40px 0;
+}
+
+form {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  width: 25vw;
+}
+
+form label {
+  font-size: 1.2rem;
+}
+
+form button {
+  color: #fff;
+  background-color: var(--verdeClaro);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 0;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+footer form input {
+  width: 100%;
+  height: 25px;
+  background-color: var(--verdeContraste);
+  border: none;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 30px;
+}
+footer form input:focus {
+  outline: none;
+  border-bottom: 1px solid var(--verdeClaro);
+}
+
+.faleConosco {
+  width: 25vw;
+  color: #fff;
+}
+
+.faleConosco h1 {
+  font-size: 2.5rem;
+}
+
+.faleConosco p {
+  font-size: 1.2rem;
+  margin-top: 20px;
+}

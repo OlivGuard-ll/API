@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador Financeiro - OlivGuard</title>
+    <link rel="stylesheet" href="../css/simulador.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <header>
+        <a href="index.html"
+          ><img src="../assets/img/logoOlivGuard 1.png" alt="" srcset=""
+        /></a>
+  
+        <nav>
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="simulador.html">Simulador Financeiro</a></li>
+            <li><a href="login.html">Login</a></li>
+          </ul>
+        </nav>
+      </header>
+
+    <main>
+      <h1>OlivGuard - Simulador financeiro</h1>
+
+      <div class="pergunta">
+        Quantos <b>Hectares</b> sua plantação de oliva possui?
+        <input
+          type="text"
+          id="input_qtdHectares"
+          placeholder="Digite a quantidade"
+        />
+      </div>
+
+      <div class="pergunta">
+        Qual sua <b>Meta de Produção</b> para esse ano?
+        <input
+          type="text"
+          id="input_metaProd"
+          placeholder="Digite a meta (Toneladas)"
+        />
+      </div>
+
+      <div class="pergunta">
+        Qual o <b>Valor da Tonelada</b> do seu produto?
+        <input
+          type="text"
+          id="input_valorKg"
+          placeholder="Digite o valor da Tonelada (R$)"
+        />
+      </div>
+
+      <div class="pergunta botao">
+        Qual a <b>Porcentagem de Perda</b> da sua plantação?
+        <input
+          type="text"
+          id="input_perda"
+          placeholder="Digite a porcentagem (%)"
+        />
+        <button onclick="calcular()">Calcular Produção</button>
+      </div>
+
+      <div id="res"></div>
+      <div id="res2"></div>
+      <div id="res3"></div>
+    </main>
+
+  </body>
+</html>
+
+<script>
+  function calcular() {
+    var hectares = Number(input_qtdHectares.value);
+    var producaoToneladas = Number(input_metaProd.value);
+    var precoTonelada = Number(input_valorKg.value);
+
+    // PERDA E CONVERSÃO PARA DECIMAL
+    var perda = Number(input_perda.value);
+    var perdaDecimal = perda / 100;
+
+    // SEM PROJETO
+    var producaoFinal = producaoToneladas * (1 - perdaDecimal);
+    var ganhoSemProjeto = producaoFinal * precoTonelada;
+    var producaoFinalHectares =
+      (producaoToneladas / hectares) * (1 - perdaDecimal);
+
+    // COM PROJETO
+    var producaoFinalProjeto = producaoToneladas * (1 - perdaDecimal / 2);
+    var ganhoComProjeto = producaoFinalProjeto * precoTonelada;
+    var producaoFinalProjetoHectares =
+      (producaoToneladas / hectares) * (1 - perdaDecimal / 2);
+
+    // IF DE VERIFICACAO DAS INPUTS
+    if (
+      isNaN(hectares) ||
+      hectares <= 0 ||
+      isNaN(producaoToneladas) ||
+      producaoToneladas <= 0 ||
+      isNaN(precoTonelada) ||
+      precoTonelada <= 0 ||
+      isNaN(perda) ||
+      perda < 0
+    ) {
+      alert(`Informe valores válidos nos campos!`);
+      res.innerHTML = "";
+      res2.innerHTML = "";
+      res3.innerHTML = "";
+      return;
+    }
+
+    // VAR DE RENDIMENTO SEM E COM PROJETO
+
+    var classificacaoSemProjeto = "";
+    if (producaoFinalHectares < 3) {
+      classificacaoSemProjeto = "Baixo Rendimento";
+    } else if (producaoFinalHectares >= 3 && producaoFinalHectares < 6) {
+      classificacaoSemProjeto = "Rendimento Médio";
+    } else if (producaoFinalHectares >= 6 && producaoFinalHectares < 10) {
+      classificacaoSemProjeto = "Bom Rendimento";
+    } else {
+      classificacaoSemProjeto = "Excelente Rendimento";
+    }
+
+    var classificacao = "";
+    if (producaoFinalProjetoHectares < 3) {
+      classificacao = "Baixo Rendimento";
+    } else if (
+      producaoFinalProjetoHectares >= 3 &&
+      producaoFinalProjetoHectares < 6
+    ) {
+      classificacao = "Rendimento Médio";
+    } else if (
+      producaoFinalProjetoHectares >= 6 &&
+      producaoFinalProjetoHectares < 10
+    ) {
+      classificacao = "Bom Rendimento";
+    } else {
+      classificacao = "Excelente Rendimento";
+    }
+
+    res.innerHTML = `
+        <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 100%; text-align: center;">
+            <thead style="background-color: #f2f2f2;">
+                <tr>
+                    <th>Indicador</th>
+                    <th>Sem OlivGuard</th>
+                    <th>Com OlivGuard</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Produção Final</strong></td>
+                    <td>${producaoFinal.toFixed(2)} t</td>
+                    <td>${producaoFinalProjeto.toFixed(2)} t</td>
+                </tr>
+                <tr>
+                    <td><strong>Ganho Estimado</strong></td>
+                    <td>${ganhoSemProjeto.toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })}</td>
+                    <td>${ganhoComProjeto.toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })}</td>
+                </tr>
+                <tr>
+                    <td><strong>Produção por Hectare</strong></td>
+                    <td>${producaoFinalHectares.toFixed(2)} t/ha</td>
+                    <td>${producaoFinalProjetoHectares.toFixed(2)} t/ha</td>
+                </tr>
+                <tr>
+                    <td><strong>Perda da Produção</strong></td>
+                    <td>${perda}%</td>
+                    <td>${perda / 2}%</td>
+                </tr>
+                <tr>
+                    <td><strong>Classificação</strong></td>
+                    <td>${classificacaoSemProjeto}</td>
+                    <td>${classificacao}</td>
+                </tr>
+            </tbody>
+        </table>
+    `;
+
+    res2.innerHTML = `
+        <b>Classificação Qualitativa:</b><br>
+        Baixo Rendimento: Menos de 3 t/ha<br>
+        Rendimento Médio: Entre 3 e 6 t/ha<br>
+        Bom Rendimento: Entre 6 e 10 t/ha<br>
+        Excelente Rendimento: Acima de 10 t/ha 
+        <br><br>
+        Fonte: Incaper (Instituto Capixaba de Pesquisa, Assistência Técnica e Extensão Rural)
+        <br><br>
+    `;
+
+    res3.innerHTML = `<b> Como a nossa tecnologia pode ajudar sua plantação? </b> <br>
+    Sua plantação de oliveiras possui um potencial produtivo de <strong> ${producaoToneladas} </strong> toneladas ao ano. <br> No entanto, sem a utilização de tecnologias de monitoramento, estima-se que <strong> ${perda}% </strong> dessa produção seja perdida, resultando em uma colheita de apenas <strong> ${producaoFinal} </strong> toneladas. <br> Esse volume gera um retorno financeiro de <strong> ${ganhoSemProjeto.toLocaleString(
+      "pt-BR",
+      { style: "currency", currency: "BRL" }
+    )}</strong>, com uma produtividade média de <strong> ${producaoFinalHectares} </strong> toneladas por hectare, classificada como <strong> ${classificacaoSemProjeto} </strong>.
+
+    <br><br>
+
+    A partir da aplicação do OlivGuard, sistema que utiliza sensores para monitorar a umidade do solo, estima-se uma redução de perda para <strong> ${
+      perda / 2
+    }% </strong>. <br> Isso fez com que a produção final saltasse para <strong> ${producaoFinalProjeto} </strong> toneladas, aumentando o ganho bruto para <strong> ${ganhoComProjeto.toLocaleString(
+      "pt-BR",
+      { style: "currency", currency: "BRL" }
+    )}</strong>. <br> A produtividade por hectare também subiu para <strong> ${producaoFinalProjetoHectares} </strong> toneladas, classificada como <strong> ${classificacao}</strong>.
+    `;
+
+    // Mostrar as divs de resultados
+    res.style.display = "block";
+    res2.style.display = "block";
+    res3.style.display = "block";
+  }
+</script>

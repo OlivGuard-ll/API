@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro - OlivGuard</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/cadastro.css" />
+  <link rel="shortcut icon" type="imagex/png" href="../assets/icons/icons8-oliva-50.png" />
+</head>
+
+<body onload="listar()">
+  <header>
+    <a href="index.html">
+      <img src="../assets/img/logoOlivGuard 1.png" alt="" />
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="simulador.html">Simulador Financeiro</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="esquerda">
+      <img src="../assets/img/cadastro.jpg" alt="Imagem de cadastro" />
+    </section>
+
+    <section class="direita">
+      <div class="container">
+        <div class="inputs" id="etapa1">
+          <h1>Crie sua conta!</h1>
+          <div class="campo">
+            <label for="input_nome">Nome:</label>
+            <input type="text" placeholder="Ex: João" id="input_nome" required/>
+          </div>
+          <div class="campo">
+            <label for="input_sobrenome">Sobrenome:</label>
+            <input type="text" placeholder="Ex: Santos" id="input_sobrenome" required/>
+          </div>
+          <div class="campo">
+            <label for="input_email">Email:</label>
+            <input type="text" placeholder="Ex: joaosantos@email.com" id="input_email" required/>
+          </div>
+          <div class="campo">
+            <label for="input_senha">Senha:</label>
+            <input type="password" placeholder="********" id="input_senha" required/>
+          </div>
+          <div class="campo">
+            <label for="input_repetirSenha">Confirme a senha:</label>
+            <input type="password" placeholder="********" id="input_repetirSenha" required/>
+          </div>
+          <div class="campo">
+            <label for="input_codigo">Código de ativação:</label>
+            <input type="text" placeholder="FUK1G68" id="input_codigo" required/>
+          </div>
+          
+          <button onclick="cadastrar()">Cadastrar</button>
+          
+          <p>Já tem uma conta? <a href="./login.html">Conecte-se</a></p>
+        </div>
+        
+        <p id="mensagem_erro" style="color: red; margin-top: 10px;"></p>
+
+    </section>
+  </main>
+</body>
+</html> 
+
+<script>
+
+  // Array para armazenar empresas cadastradas para validação de código de ativação 
+  let listaEmpresasCadastradas = [];
+
+  function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = input_nome.value;
+    var sobrenomeVar = input_sobrenome.value; 
+    var emailVar = input_email.value;
+    var senhaVar = input_senha.value;
+    var confirmacaoSenhaVar = input_repetirSenha.value;
+    var codigoVar = input_codigo.value;
+    var idEmpresaVincular
+
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      sobrenomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == "" ||
+      codigoVar == ""
+    ) {
+     
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+
+      
+      return false;
+    
+      
+    }
+
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+        idEmpresaVincular = listaEmpresasCadastradas[i].idEmpresa
+        console.log("Código de ativação válido.");
+        break;
+      } 
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        sobrenomeServer: sobrenomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        idEmpresaVincularServer: idEmpresaVincular
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+         
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  // Listando empresas cadastradas 
+  function listar() {
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresasCadastradas.push(empresa);
+
+            console.log("listaEmpresasCadastradas")
+            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+ 
+
+
+</script>

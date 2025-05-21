@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - OlivGuard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+
+    <aside>
+      Navbar
+    </aside>
+
+    <main>
+      <section class="containerIndicadores">
+        <div class="indicador">UMIDADE DO SOLO ATUAL</div>
+        <div class="indicador">SITUAÇÃO ATUAL DO SETOR</div>
+        <div class="indicador">UMIDADE MÉDIA DO SOLO DO DIA </div>
+        <div class="indicador">NÚMERO DE DIAS SEM ALERTAS CRÍTICOS</div>
+        <div class="indicador">MÉDIA DE UMIDADE DE SOLO DOS ÚLTIMOS 30 DIAS</div>
+      </section>
+      
+      <section class="containerMeio">
+        <div class="graficoLinha">
+          <canvas id="graficoAtual" width="270px" height="100px"></canvas>
+
+        </div>
+
+        <div class="legenda">Faixa recomendada de umidade do solo para oliveiras:
+        Ideal manter entre 50% e 80% <br><br>
+
+        📊 Classificação da Umidade: <br> <br>
+
+              ✅ Ideal: entre 60% e 70% <br>
+
+              ⚠️ Atenção: abaixo de 60% ou acima de 70% <br>
+
+              🚨 Crítico: abaixo de 50% ou acima de 80% <br>
+        </div>
+      </section>
+
+      <section class="containerBaixo">
+        <div class="graficoBarra">
+           <canvas id="graficoMensal" width="460px" height="100px"></canvas>
+        </div>
+      </section>
+    </main>
+
+  <script>
+    new Chart(document.getElementById("graficoAtual"), {
+          type: "line",
+          data: {
+            labels: [
+              "00h",
+              "02h",
+              "04h",
+              "06h",
+              "08h",
+              "10h",
+              "12h",
+              "14h",
+              "16h",
+              "18h",
+              "20h",
+              "22h",
+            ],
+            datasets: [
+              {
+                label: "Umidade (%)",
+                data: [70, 68, 66, 65, 60, 55, 50, 45, 85, 83, 78, 72],
+                borderColor: "#00008b",
+                fill: false,
+                tension: 0.3,
+              },
+            ],
+          },
+          options: { responsive: true },
+        });
+
+
+        new Chart(document.getElementById("graficoMensal"), {
+        type: "bar",
+        data: {
+          labels: Array.from({ length: 30 }, (_, i) => `Dia ${i + 1}`),
+          datasets: [
+            {
+              label: "Média Diária de Umidade (%)",
+              data: [
+                68, 64, 60, 55, 50, 49, 47, 45, 44, 42, 52, 58, 64, 78, 85, 83,
+                80, 76, 70, 65, 60, 58, 55, 53, 51, 48, 45, 43, 41, 50,
+              ],
+              backgroundColor: "#006400",
+            },
+          ],
+        },
+        options: { responsive: true },
+      });
+
+  </script>
+  </body>
+</html>
+
