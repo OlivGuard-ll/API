@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,96 +35,78 @@
           <h1>Crie sua conta!</h1>
           <div class="campo">
             <label for="input_nome">Nome:</label>
-            <input type="text" placeholder="Ex: João" id="input_nome" required/>
+            <input type="text" placeholder="Ex: João" id="input_nome" required />
           </div>
           <div class="campo">
             <label for="input_sobrenome">Sobrenome:</label>
-            <input type="text" placeholder="Ex: Santos" id="input_sobrenome" required/>
+            <input type="text" placeholder="Ex: Santos" id="input_sobrenome" required />
           </div>
           <div class="campo">
             <label for="input_email">Email:</label>
-            <input type="text" placeholder="Ex: joaosantos@email.com" id="input_email" required/>
+            <input type="text" placeholder="Ex: joaosantos@email.com" id="input_email" required />
           </div>
           <div class="campo">
             <label for="input_senha">Senha:</label>
-            <input type="password" placeholder="********" id="input_senha" required/>
+            <input type="password" placeholder="********" id="input_senha" required />
           </div>
           <div class="campo">
             <label for="input_repetirSenha">Confirme a senha:</label>
-            <input type="password" placeholder="********" id="input_repetirSenha" required/>
+            <input type="password" placeholder="********" id="input_repetirSenha" required />
           </div>
           <div class="campo">
             <label for="input_codigo">Código de ativação:</label>
-            <input type="text" placeholder="FUK1G68" id="input_codigo" required/>
+            <input type="text" placeholder="FUK1G68" id="input_codigo" required />
           </div>
-          
+
           <button onclick="cadastrar()">Cadastrar</button>
-          
+
           <p>Já tem uma conta? <a href="./login.html">Conecte-se</a></p>
         </div>
-        
+
         <p id="mensagem_erro" style="color: red; margin-top: 10px;"></p>
 
     </section>
   </main>
 </body>
-</html> 
+
+</html>
 
 <script>
-
-  // Array para armazenar empresas cadastradas para validação de código de ativação 
   let listaEmpresasCadastradas = [];
 
   function cadastrar() {
-    // aguardar();
 
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
-    var nomeVar = input_nome.value;
-    var sobrenomeVar = input_sobrenome.value; 
-    var emailVar = input_email.value;
+    var nomeVar = input_nome.value.trim();
+    var sobrenomeVar = input_sobrenome.value.trim();
+    var emailVar = input_email.value.trim();
     var senhaVar = input_senha.value;
     var confirmacaoSenhaVar = input_repetirSenha.value;
-    var codigoVar = input_codigo.value;
+    var codigoVar = input_codigo.value.trim();
     var idEmpresaVincular
 
-    // Verificando se há algum campo em branco
-    if (
-      nomeVar == "" ||
-      sobrenomeVar == "" ||
-      emailVar == "" ||
-      senhaVar == "" ||
-      confirmacaoSenhaVar == "" ||
-      codigoVar == ""
-    ) {
-     
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+    if (!nomeVar || !sobrenomeVar || !emailVar || !senhaVar || !codigoVar) {
+      alert("Preencha todos os campos obrigatórios.");
+    }else if (!emailVar.endsWith("@gmail.com") && !emailVar.endsWith("@sptech.school")) {
+      alert("Insira um e-mail válido (Gmail ou SPTech).");
+    }else if (senhaVar.length < 8) {
+      alert("A senha deve conter no mínimo 8 caracteres.");
+    }else if (senhaVar !== confirmacaoSenhaVar) {
+      alert("As senhas não coincidem.");
+    }else{
 
-      
-      return false;
-    
-      
-    }
-
-    // Verificando se o código de ativação é de alguma empresa cadastrada
-    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+          for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
       if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
         idEmpresaVincular = listaEmpresasCadastradas[i].idEmpresa
         console.log("Código de ativação válido.");
         break;
-      } 
+      }
     }
-
-    // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
         sobrenomeServer: sobrenomeVar,
         emailServer: emailVar,
@@ -133,10 +116,7 @@
     })
       .then(function (resposta) {
         console.log("resposta: ", resposta);
-
         if (resposta.ok) {
-         
-
           mensagem_erro.innerHTML =
             "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
@@ -144,7 +124,7 @@
             window.location = "login.html";
           }, "2000");
 
-          
+
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
@@ -153,11 +133,9 @@
         console.log(`#ERRO: ${resposta}`);
         finalizarAguardar();
       });
-
     return false;
-  }
-
-  // Listando empresas cadastradas 
+  }  
+}  
   function listar() {
     fetch("/empresas/listar", {
       method: "GET",
@@ -176,8 +154,4 @@
         console.log(`#ERRO: ${resposta}`);
       });
   }
-
- 
-
-
 </script>
