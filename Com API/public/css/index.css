@@ -1,7 +1,6 @@
 .banner {
   width: 100%;
   height: 80vh;
-  background-color: var(--verdeContraste);
   display: flex;
   align-items: center;
   justify-content: center;

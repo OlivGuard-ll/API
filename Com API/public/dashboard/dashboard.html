@@ -11,16 +11,22 @@
   <body>
 
     <aside>
-      Navbar
+      <img src="../assets/img/logoOlivGuard 2.svg" alt="" srcset="">
+
+      <ul>
+        <li><a href="">Dashboard</a></li>
+        <li><a href="">Dashboard</a></li>
+        <li><a href="">Dashboard</a></li>
+      </ul>
     </aside>
 
     <main>
       <section class="containerIndicadores">
-        <div class="indicador">UMIDADE DO SOLO ATUAL</div>
-        <div class="indicador">SITUAÇÃO ATUAL DO SETOR</div>
-        <div class="indicador">UMIDADE MÉDIA DO SOLO DO DIA </div>
-        <div class="indicador">NÚMERO DE DIAS SEM ALERTAS CRÍTICOS</div>
-        <div class="indicador">MÉDIA DE UMIDADE DE SOLO DOS ÚLTIMOS 30 DIAS</div>
+        <div class="indicador alerta"><h4>Situação atual:</h4>⚠️ ALERTA</div>
+        <div class="indicador alerta"><h4>Última leitura:</h4>80%</div>
+        <div class="indicador ideal"><h4>Umidade média do dia:</h4>76%</div>
+        <div class="indicador ideal"><h4>Dias seguidos sem alertas:</h4>5 dias</div>
+        <div class="indicador atencao"><h4>Média de umidade últimos 30 dias:</h4>60%</div>
       </section>
       
       <section class="containerMeio">
@@ -29,16 +35,11 @@
 
         </div>
 
-        <div class="legenda">Faixa recomendada de umidade do solo para oliveiras:
-        Ideal manter entre 50% e 80% <br><br>
-
-        📊 Classificação da Umidade: <br> <br>
-
-              ✅ Ideal: entre 60% e 70% <br>
-
-              ⚠️ Atenção: abaixo de 60% ou acima de 70% <br>
-
-              🚨 Crítico: abaixo de 50% ou acima de 80% <br>
+        <div class="legenda">
+          <p class="exemplo faixa">◻️ Faixa de umidade recomendada: 50% a 80%</p>
+          <p class="exemplo ideal">✅ Ideal (50% a 80%)</p>
+          <p class="exemplo alerta">⚠️ Alerta (próximo do estágio atenção)</p>
+          <p class="exemplo atencao">❌ Atenção (<50% ou >80%)</p>
         </div>
       </section>
 
