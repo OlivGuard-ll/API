@@ -72,38 +72,6 @@
             </div>
             <div id="graficos">
             </div>
-=======
-    <aside>
-      <img src="../assets/img/logoOlivGuard 2.svg" alt="" srcset="">
-
-      <ul>
-        <li><a href="">Dashboard</a></li>
-        <li><a href="">Dashboard</a></li>
-        <li><a href="">Dashboard</a></li>
-      </ul>
-    </aside>
-
-    <main>
-      <section class="containerIndicadores">
-        <div class="indicador alerta"><h4>Situação atual:</h4>⚠️ ALERTA</div>
-        <div class="indicador alerta"><h4>Última leitura:</h4>80%</div>
-        <div class="indicador ideal"><h4>Umidade média do dia:</h4>76%</div>
-        <div class="indicador ideal"><h4>Dias seguidos sem alertas:</h4>5 dias</div>
-        <div class="indicador atencao"><h4>Média de umidade últimos 30 dias:</h4>60%</div>
-      </section>
-      
-      <section class="containerMeio">
-        <div class="graficoLinha">
-          <canvas id="graficoAtual" width="270px" height="100px"></canvas>
-
-        </div>
-
-        <div class="legenda">
-          <p class="exemplo faixa">◻️ Faixa de umidade recomendada: 50% a 80%</p>
-          <p class="exemplo ideal">✅ Ideal (50% a 80%)</p>
-          <p class="exemplo alerta">⚠️ Alerta (próximo do estágio atenção)</p>
-          <p class="exemplo atencao">❌ Atenção (<50% ou >80%)</p>
->>>>>>> 3f6f525b153b55e526062c4bd3f8f28e0783ea2d
         </div>
     </div>
 
@@ -120,54 +88,54 @@
     window.onload = exibirAquariosDoUsuario();
 
     function exibirAquariosDoUsuario() {
-        var aquarios = JSON.parse(sessionStorage.AQUARIOS);
+        var aquarios = JSON.parse(sessionStorage.SENSOR);
         aquarios.forEach(item => {
             document.getElementById("btnAquario").innerHTML += `
-            <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
+            <button class="btn-chart" onclick="exibirAquario(${item.idSensor})" id="btnAquario${item.idSensor}">${item.tipoLeitura}</button>
             `
 
             document.getElementById("graficos").innerHTML += `
-                <div id="grafico${item.id}" class="display-none">
+                <div id="grafico${item.idSensor}" class="display-none">
                     <h3 class="tituloGraficos">
-                        <span id="tituloAquario${item.id}">${item.descricao}</span>
+                        <span id="tituloAquario${item.idSensor}">${item.tipoLeitura}</span>
                     </h3>
                     <div class="graph">
-                        <canvas id="myChartCanvas${item.id}"></canvas>
+                        <canvas id="myChartCanvas${item.idSensor}"></canvas>
                     </div>
                     <div class="label-captura">
-                        <p id="avisoCaptura${item.id}" style="color: white"></p>
+                        <p id="avisoCaptura${item.idSensor}" style="color: white"></p>
                     </div>
                 </div>
             `
 
-            obterDadosGrafico(item.id)
+            obterDadosGrafico(item.idSensor)
         });
 
         if (aquarios.length > 0) {
-            exibirAquario(aquarios[0].id)
+            exibirAquario(aquarios[0].idSensor)
         }
     }
 
     function alterarTitulo(idAquario) {
         var tituloAquario = document.getElementById(`tituloAquario${idAquario}`)
-        var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAquario).descricao;
-        tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
+        var descricao = JSON.parse(sessionStorage.SENSOR).find(item => item.idSensor == idAquario).tipoLeitura;
+        tituloAquario.innerHTML = "Últimas medidas de <span style='color: #e6005a'>" + descricao + "</span>"
     }
 
     function exibirAquario(idAquario) {
-        let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
+        let todosOsGraficos = JSON.parse(sessionStorage.SENSOR);
 
         for (i = 0; i < todosOsGraficos.length; i++) {
             // exibindo - ou não - o gráfico
-            if (todosOsGraficos[i].id != idAquario) {
-                let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
+            if (todosOsGraficos[i].idSensor != idAquario) {
+                let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].idSensor}`)
                 if (elementoAtual.classList.contains("display-block")) {
                     elementoAtual.classList.remove("display-block")
                 }
                 elementoAtual.classList.add("display-none")
 
                 // alterando estilo do botão
-                let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
+                let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].idSensor}`)
                 if (btnAtual.classList.contains("btn-pink")) {
                     btnAtual.classList.remove("btn-pink")
                 }
@@ -259,9 +227,9 @@
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
-            labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.umidade);
-            dados.datasets[1].data.push(registro.temperatura);
+            labels.push(registro.dtLeitura_grafico);
+            dados.datasets[0].data.push(registro.leitura);
+            // dados.datasets[1].data.push(registro.temperatura);
         }
 
         console.log('----------------------------------------------')
@@ -284,7 +252,7 @@
             config
         );
 
-        setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+        // setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
     }
 
 
