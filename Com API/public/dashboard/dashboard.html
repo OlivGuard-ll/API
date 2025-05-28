@@ -292,13 +292,13 @@
                         dados.labels.push(novoRegistro[0].dtLeitura_grafico); // incluir um novo momento
 
                         dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                        dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
+                        dados.datasets[0].data.push(novoRegistro[0].leitura); // incluir uma nova medida de umidade
 
                         myChart.update();
                     }
 
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 5000);
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
