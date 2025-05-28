@@ -102,16 +102,15 @@
             document.getElementById("cardAquarios").innerHTML += `
                     <div class="card-aquario">
                         <div class="title-aquario">
-                            <h1>${item.tipoLeitura}</h1>
+                            <h1>${item.tipoLeitura} id:${item.idSensor}</h1>
                         </div>
                         <div class="desc-aquario">
                         <div class="temperatura">
-                            <p id="temp_aquario_${item.idSensor}">-°C</p>
+                            <p ${item.idSensor}">-°C</p>
                         </div>
                         <div class="cor-alerta" id="card_${item.idSensor}"></div>
                     </div>
-                    </div>
-                    `
+                    </div>`
         });
     }
 
