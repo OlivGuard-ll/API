@@ -7,7 +7,7 @@ function buscarUltimasMedidas(idAquario, limite_linhas) {
         unidadedeMedida as unidadedeMedida,
                         dtLeitura,
                         DATE_FORMAT(dtLeitura,'%H:%i:%s') as dtLeitura_grafico
-                    FROM Leitura
+                    FROM leitura
                     WHERE fkSensor = ${idAquario}
                     ORDER BY idLeitura DESC LIMIT ${limite_linhas}`;
 
@@ -21,7 +21,7 @@ function buscarMedidasEmTempoReal(idAquario) {
         leitura as leitura,
 		DATE_FORMAT(dtLeitura,'%H:%i:%s') as dtLeitura_grafico, 
 		fkSensor 
-		FROM Leitura WHERE fkSensor = ${idAquario}
+		FROM leitura WHERE fkSensor = ${idAquario}
                     ORDER BY idLeitura DESC LIMIT 1;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
