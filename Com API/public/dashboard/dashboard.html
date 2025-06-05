@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AquaTech | Dashboards</title>
 
-    
+    <link rel="stylesheet" href="../css/graficos.css">
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
     <script src="../js/sessao.js"></script>
@@ -30,7 +30,7 @@
 
 <body>
 
-        <div class="janela">
+    <div class="janela">
         <div class="header-left">
             <h1>OlivGuard</h1>
 
@@ -52,17 +52,34 @@
         </div>
     </div>
 
-        <div class="dash">
-            <div id="alerta">
-            </div>
+    <div class="dash">
 
-            <div class="btns-dash" id="btnAquario">
-                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
-            </div>
-            <div id="graficos">
-                
+        <section class="indicadores">
+            <div class="indicador">Indicador 1</div>
+            <div class="indicador">Indicador 2</div>
+            <div class="indicador">Indicador 3</div>
+            <div class="indicador">Indicador 4</div>
+            <div class="indicador">Indicador 5</div>
+        </section>
+
+        <div class="container-meio">
+            <div class="meio-esquerda">Gráfico linha</div>
+            <div class="meio-direita">
+                <p class="exemplo faixa">◻️ Faixa de umidade recomendada: 50% a 80%</p>
+                <p class="exemplo ideal">✅ Ideal (50% a 80%)</p>
+                <p class="exemplo alerta">⚠️ Alerta (próximo do estágio atenção)</p>
+                <p class="exemplo atencao">❌ Atenção (<50% ou>80%)</p>
             </div>
         </div>
+
+        <div class="container-baixo">
+            <div class="baixo">Gráfico barra</div>
+        </div>
+
+    </div>
+
+    <div id="graficos"></div>
+    </div>
     </div>
 
 
@@ -252,8 +269,6 @@
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
     function atualizarGrafico(idAquario, dados, myChart) {
-
-
 
         fetch(`/medidas/tempo-real/${idAquario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
