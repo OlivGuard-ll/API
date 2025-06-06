@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AquaTech | Tempo Real</title>
 
-
     <link rel="stylesheet" href="./../css/dashboards.css">
+    <link rel="stylesheet" href="../css/graficos.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
 
     <script src="../js/sessao.js"></script>
@@ -22,7 +22,7 @@
 
 <body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()">
 
-    <div class="janela">
+<div class="janela">
         <div class="header-left">
             <h1>OlivGuard</h1>
 
@@ -52,30 +52,58 @@
                 Legenda - Parâmetros para Alertas
             </p>
             <div class="parametros-alerta">
-                <div class="item-regua perigo-frio">
-                    <p>Perigo</p>
-                    <p>&lt;=5°C</p>
-                </div>
-                <div class="item-regua alerta-frio">
-                    <p>Alerta</p>
-                    <p>&lt;=10°C</p>
-                </div>
                 <div class="item-regua ideal">
                     <p>Ideal</p>
-                    <p>20°C</p>
+                    <p>%</p>
                 </div>
-                <div class="item-regua alerta-quente">
+                <div class="item-regua alerta">
                     <p>Alerta</p>
-                    <p>&gt;=22°C</p>
+                    <p>%</p>
                 </div>
-                <div class="item-regua perigo-quente">
-                    <p>Perigo</p>
-                    <p>&gt;=23°C</p>
+                <div class="item-regua atencao">
+                    <p>Atenção</p>
+                    <p>%</p>
                 </div>
             </div>
         </div>
 
         <div class="cards" id="cardAquarios">
+
+            <div class="ideal card-aquario">
+                        <div class="title-aquario">
+                            <h1>${item.tipoLeitura} id:${item.idSensor}</h1>
+                        </div>
+                        <div class="desc-aquario">
+                        <div class="temperatura">
+                            <p ${item.idSensor}">-%</p>
+                        </div>
+                        <div class="cor-alerta" id="card_${item.idSensor}"></div>
+                    </div>
+                    </div>
+
+                    <div class="alerta card-aquario">
+                        <div class="title-aquario">
+                            <h1>${item.tipoLeitura} id:${item.idSensor}</h1>
+                        </div>
+                        <div class="desc-aquario">
+                        <div class="temperatura">
+                            <p ${item.idSensor}">-%</p>
+                        </div>
+                        <div class="cor-alerta" id="card_${item.idSensor}"></div>
+                    </div>
+                    </div>
+
+                    <div class="atencao card-aquario">
+                        <div class="title-aquario">
+                            <h1>${item.tipoLeitura} id:${item.idSensor}</h1>
+                        </div>
+                        <div class="desc-aquario">
+                        <div class="temperatura">
+                            <p ${item.idSensor}">-%</p>
+                        </div>
+                        <div class="cor-alerta" id="card_${item.idSensor}"></div>
+                    </div>
+                    </div>
 
         </div>
 
@@ -96,7 +124,7 @@
                         </div>
                         <div class="desc-aquario">
                         <div class="temperatura">
-                            <p ${item.idSensor}">-°C</p>
+                            <p ${item.idSensor}">-%</p>
                         </div>
                         <div class="cor-alerta" id="card_${item.idSensor}"></div>
                     </div>
