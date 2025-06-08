@@ -107,15 +107,12 @@
         aquarios.forEach(item => {
             idSensorCerto = Number(item.idSensor)
             document.getElementById("line").innerHTML += `
-                <div id="grafico${item.idSensor}" class="display-none">
+                <div id="grafico${item.idSensor}" class="display-none container-grafico">
                     <h3 class="tituloGraficos">
                         <span id="tituloAquario${item.idSensor}">${item.tipoLeitura}</span>
                     </h3>
                     <div class="graph">
                         <canvas id="myChartCanvas${item.idSensor}"></canvas>
-                    </div>
-                    <div class="label-captura">
-                        <p id="avisoCaptura${item.idSensor}" style="color: white"></p>
                     </div>
                 </div>
             `
@@ -280,13 +277,13 @@
     function exibirAquariosDoUsuarioBar() {  
         var aquarios = JSON.parse(sessionStorage.SENSOR);
         aquarios.forEach(item => {
-            document.getElementById("bar").innerHTML += `
-                <div id="graficoBarra${item.idSensor}" class="display-none">
+            document.getElementById("bar").innerHTML = `
+                <div id="graficoBarra${item.idSensor}" class="display-none container-grafico">
                     <h3 class="tituloGraficos">
                         <span id="tituloAquario${item.idSensor}">${item.idSensor}</span>
                     </h3>
                     <div class="graphBar">
-                        <canvas id="myChartCanvasBar${item.idSensor}"></canvas>
+                        <canvas id="myChartCanvasBar${item.idSensor}" class="grafico"></canvas>
                     </div>
                 </div>
             `
