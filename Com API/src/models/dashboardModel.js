@@ -23,14 +23,14 @@ function mediaUmidadeMes(idSensor) {
   var instrucaoSql = `SELECT ROUND(avg(leituraTotal), 1) AS mediaUltimoTrintaDias FROM (
 SELECT l.leitura AS leituraTotal, DATE(dtLeitura) as dataDaLeitura, s.idSensor as idSensor FROM leitura as l JOIN sensor as s ON l.fkSensor = s.idSensor
 	WHERE s.idSensor = ${idSensor}  
-    GROUP BY dataDaLeitura, l.leitura LIMIT 30) mediaDaSomaDosultimos30Dias;`;
+    GROUP BY dataDaLeitura, l.leitura LIMIT 30) mediaDaSomaDosultimos30Dias;`
 
   return database.executar(instrucaoSql);
 }
 
 function ultimaLeitura(idSensor) {
   var instrucaoSql = `SELECT ROUND(AVG(somaDoDia), 1) as mediaDoDia, dataDaLeitura, idSensor FROM (
-	SELECT l.leitura as somaDoDia, s.idSensor as idSensor, DATE(dtLeitura)  as dataDaLeitura FROM 
+	SELECT l.leitura as somaDoDia, s.idSensor as idSensor, date_format(dtLeitura, '%m-%d')  as dataDaLeitura FROM 
 				leitura as l JOIN sensor as s 
 					ON l.fkSensor = s.idSensor
 ) as subMediaDoDia30Dias
@@ -43,7 +43,7 @@ function ultimaLeitura(idSensor) {
 
 function ultimaLeituraTempoReal(idSensor) {
   var instrucaoSql = `SELECT ROUND(AVG(somaDoDia), 1) as mediaDoDia, dataDaLeitura, idDoSensor FROM (
-	SELECT l.leitura as somaDoDia, s.idSensor as idDoSensor, DATE(dtLeitura)  as dataDaLeitura FROM 
+	SELECT l.leitura as somaDoDia, s.idSensor as idDoSensor, date_format(dtLeitura, '%m-%d')  as dataDaLeitura FROM 
 				leitura as l JOIN sensor as s 
 					ON l.fkSensor = s.idSensor
 ) as subMediaDoDia30Dias

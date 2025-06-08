@@ -356,11 +356,7 @@
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = resposta.length - 1; i >= 0 ; i--){
             var registro = resposta[i];
-            var dataCerta = new Date(registro.dataDaLeitura).toLocaleDateString('pt-BR', {
-            hour12: false,
-            timeZone: "America/Sao_Paulo"
-          });
-            labels.push(dataCerta);
+            labels.push(registro.dataDaLeitura);
             dados.datasets[0].data.push(registro.mediaDoDia);
         }
 
