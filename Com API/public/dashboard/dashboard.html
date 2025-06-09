@@ -258,7 +258,8 @@
                     }
 
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), umidadeAtual(), 2000);
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+                    umidadeAtual()
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -365,6 +366,17 @@
         const config = {
             type: 'bar',
             data: dados,
+            options: {
+                scales: {
+                    x: {
+                        ticks:{
+                            font: {
+                                size: 10
+                            }
+                        }
+                    }
+                }
+            }
             
         };  
 
