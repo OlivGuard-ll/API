@@ -115,21 +115,34 @@
 
 <script>
 
+
     function exibirAquarios() {
         JSON.parse(sessionStorage.SENSOR).forEach(item => {
             document.getElementById("cardAquarios").innerHTML += `
                     <div class="card-aquario">
                         <div class="title-aquario">
-                            <h1>${item.tipoLeitura} id:${item.idSensor}</h1>
+                            <h1 id="leituraSensor"> </h1>
                         </div>
                         <div class="desc-aquario">
                         <div class="temperatura">
-                            <p ${item.idSensor}">-%</p>
+                            <p id="idSensor"></p>
                         </div>
                         <div class="cor-alerta" id="card_${item.idSensor}"></div>
                     </div>
                     </div>`
         });
+    }
+
+        function umidadeAtual(){
+        fetch(`/dashboard/umidadeAtual/${idSensorCerto}`, {
+            method: 'GET'
+        }).then(res => res.json())
+            .forEach(item => {
+                var umidade = document.getElementById('leituraSensor')
+                var sensor = document.getElementById('idSensor')
+                umidade.innerHTML = `${item[0].leitura}%`
+                sensor.innerHTML = `${item[0].idSensor}`
+            })
     }
 
 </script>
