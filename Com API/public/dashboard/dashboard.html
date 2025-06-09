@@ -258,7 +258,7 @@
                     }
 
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), umidadeAtual(), 2000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -348,7 +348,8 @@
                 data: [],
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
-                 backgroundColor: ['#fca311'],
+                backgroundColor: ['#fca311'],  
+                barThickness: 12,
                 tension: 0.1
             }],
         };
@@ -364,6 +365,7 @@
         const config = {
             type: 'bar',
             data: dados,
+            
         };  
 
         let myChartBar = new Chart(
@@ -393,6 +395,9 @@
 
                         dados.datasets[0].data.shift();  // apagar o primeiro de umidade
                         dados.datasets[0].data.push(novoRegistro[0].mediaDoDia); 
+
+                        dados.datasets[datasets.length - 1].data.shift();  // apagar o ultimo daso
+                        dados.datasets[0].data.push(novoRegistro[datasets.length - 1].mediaDoDia); 
 
                         myChartBar.update();
                     }
