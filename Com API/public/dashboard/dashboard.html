@@ -199,7 +199,6 @@
             var registro = resposta[i];
             labels.push(registro.dtLeitura_grafico);
             dados.datasets[0].data.push(registro.leitura);
-            // dados.datasets[1].data.push(registro.temperatura);
         }
 
         // Criando estrutura para plotar gráfico - config
@@ -213,6 +212,7 @@
             document.getElementById(`myChartCanvas${idAquario}`),
             config
         );
+        
 
         setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
     }
@@ -234,8 +234,8 @@
                     console.log(`Dados atuais do gráfico:`);
                     console.log(dados);
 
-                    let avisoCaptura = document.getElementById(`avisoCaptura${idAquario}`)
-                    avisoCaptura.innerHTML = ""
+                    // let avisoCaptura = document.getElementById(`avisoCaptura${idAquario}`)
+                    // avisoCaptura.innerHTML = ""
 
                     if (novoRegistro[0].dtLeitura_grafico == dados.labels[dados.labels.length - 1]) {
                         console.log("---------------------------------------------------------------")
