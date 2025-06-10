@@ -54,6 +54,20 @@ function ultimaLeituraTempoReal(idSensor) {
   return database.executar(instrucaoSql);
 }
 
+function ultimaLeituraTempoRealCard(idEmpresa) {
+  var instrucaoSql = `SELECT s.idSensor, l.leitura
+          FROM sensor s
+          JOIN leitura l ON s.idSensor = l.fkSensor
+          WHERE s.fkEmpresa = ${idEmpresa}
+            AND l.dtLeitura = (
+                SELECT MAX(l2.dtLeitura)
+                FROM leitura l2
+                WHERE l2.fkSensor = s.idSensor
+  );
+`;
+  return database.executar(instrucaoSql);
+}
+
 
 
 module.exports = { 
@@ -61,5 +75,6 @@ module.exports = {
     umidadeMediaDia,
     mediaUmidadeMes,
     ultimaLeitura,
-    ultimaLeituraTempoReal
+    ultimaLeituraTempoReal,
+    ultimaLeituraTempoRealCard
 };

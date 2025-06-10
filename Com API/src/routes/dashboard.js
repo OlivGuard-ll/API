@@ -23,4 +23,8 @@ router.get("/ultimaLeituraTempoReal/:idSensor", function (req, res) {
     dashboardController.ultimaLeituraTempoReal(req, res)
 });
 
+router.get("/ultimaLeituraTempoRealCard/:idEmpresa", function (req, res) {
+    dashboardController.ultimaLeituraTempoRealCard(req, res)
+});
+
 module.exports = router;

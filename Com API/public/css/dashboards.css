@@ -209,7 +209,7 @@ body {
   color: white;
 }
 
-.card-aquario {
+.cardAquario {
   margin: 2%;
   width: 45%;
   flex-wrap: wrap;
@@ -224,17 +224,17 @@ body {
   transition: .3s;
 }
 
-.card-aquario:hover{
+.cardAquario:hover{
   transform: scale(1.03);
 }
 
 
 
-.card-aquario h1 {
+.cardAquario h1 {
   width: fit-content;
 }
 
-.card-aquario p {
+.cardAquario p {
   margin: 0;
   font-size: 50px;
   font-weight: lighter;

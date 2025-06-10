@@ -40,10 +40,19 @@ function ultimaLeituraTempoReal(req, res){
       });
 }
 
+function ultimaLeituraTempoRealCard(req, res){
+     var idEmpresa = req.params.idEmpresa;
+      dashboardModel.ultimaLeituraTempoRealCard(idEmpresa)
+      .then((resultado) => {
+        res.status(200).json(resultado);
+      });
+}
+
 module.exports = {
   umidadeAtual,
   umidadeMediaDia,
   mediaUmidadeMes,
   ultimaLeitura,
-  ultimaLeituraTempoReal
+  ultimaLeituraTempoReal,
+  ultimaLeituraTempoRealCard
 }

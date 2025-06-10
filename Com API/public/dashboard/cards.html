@@ -20,7 +20,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()">
+<body onload="validarSessao(), exibirAquarios()">
 
 <div class="janela">
         <div class="header-left">
@@ -69,8 +69,8 @@
 
         <div class="cards" id="cardAquarios">
 
-            <div class="ideal card-aquario">
-                        <div class="title-aquario">
+            <!-- <div class="ideal card-aquario">
+                         <div class="title-aquario">
                             <h1>${item.tipoLeitura} id:${item.idSensor}</h1>
                         </div>
                         <div class="desc-aquario">
@@ -103,7 +103,7 @@
                         </div>
                         <div class="cor-alerta" id="card_${item.idSensor}"></div>
                     </div>
-                    </div>
+                    </div> -->
 
         </div>
 
@@ -117,34 +117,45 @@
 
 
     function exibirAquarios() {
-        JSON.parse(sessionStorage.SENSOR).forEach(item => {
-            document.getElementById("cardAquarios").innerHTML += `
-                    <div class="card-aquario">
-                        <div class="title-aquario">
-                            <h1 id="leituraSensor"> </h1>
-                        </div>
-                        <div class="desc-aquario">
+    let sensores = JSON.parse(sessionStorage.SENSOR);
+    let idEmpresa = sensores[0].fkEmpresa;
+
+    fetch(`/dashboard/ultimaLeituraTempoRealCard/${idEmpresa}`, {
+        method: 'GET'
+    })
+    .then(res => {
+        return res.json();
+    }).then(data => {
+        const container = document.getElementById("cardAquarios");
+        container.innerHTML = "";
+
+        data.forEach(item => {
+            container.innerHTML += `
+                <div class="cardAquario" id="cardAquario_${item.idSensor}">
+                    <div class="title-aquario">
+                        <h1 id="leituraSensor_${item.idSensor}">${item.leitura}%</h1>
+                    </div>
+                    <div class="desc-aquario">
                         <div class="temperatura">
-                            <p id="idSensor"></p>
+                            <p id="idSensor_${item.idSensor}">Sensor ${item.idSensor}</p>
                         </div>
                         <div class="cor-alerta" id="card_${item.idSensor}"></div>
                     </div>
-                    </div>`
+                </div>`;
+                const situacao = document.getElementById(`cardAquario_${item.idSensor}`);
+                if (item.leitura < 50 || item.leitura > 80) {
+                    situacao.classList.add('alerta');
+                } else if ((item.leitura >= 50 && item.leitura <= 55) || (item.leitura >= 75 && item.leitura <= 80)) {
+                    situacao.classList.add('atencao');
+                } else {
+                    situacao.classList.add('ideal');
+                }
         });
-    }
-
-        function umidadeAtual(){
-        fetch(`/dashboard/umidadeAtual/${idSensorCerto}`, {
-            method: 'GET'
-        }).then(res => res.json())
-            .forEach(item => {
-                var umidade = document.getElementById('leituraSensor')
-                var sensor = document.getElementById('idSensor')
-                umidade.innerHTML = `${item[0].leitura}%`
-                sensor.innerHTML = `${item[0].idSensor}`
-            })
-    }
-
+    })
+    .catch(err => {
+        console.error("Erro ao buscar leituras:", err);
+    });
+}
 </script>
 
 </html>
