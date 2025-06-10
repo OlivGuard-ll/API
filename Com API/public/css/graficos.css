@@ -13,7 +13,7 @@
 .indicadores {
   display: flex;
   justify-content: space-between;
-  height: 20%;
+  height: 15%;
 }
 
 .indicador {
@@ -62,7 +62,7 @@
 }
 
 .container-baixo {
-  height: 40%;
+  height: 45%;
 }
 
 .baixo {

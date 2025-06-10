@@ -50,6 +50,10 @@
                 <img src="../assets/img/logout.svg" alt="" srcset="">
                 <h3>Sair</h3>
             </div>
+
+            <a href="#">
+                <p>Suporte</p>
+            </a>
         </div>
     </div>
 
@@ -205,6 +209,7 @@
         const config = {
             type: 'line',
             data: dados,
+            options:{devicePixelRatio: 3}
         };
 
         // Adicionando gráfico criado em div na tela
@@ -366,18 +371,8 @@
         const config = {
             type: 'bar',
             data: dados,
-            options: {
-                scales: {
-                    x: {
-                        ticks:{
-                            font: {
-                                size: 10
-                            }
-                        }
-                    }
-                }
-            }
-            
+            responsive: true,
+            options:{devicePixelRatio: 3}
         };  
 
         let myChartBar = new Chart(
