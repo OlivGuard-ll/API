@@ -94,6 +94,9 @@
 
 <script>
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    var parametro = new URLSearchParams(window.location.search)
+    var sensorId = Number(parametro.get('id'))
+    console.log(sensorId)
 
     let proximaAtualizacao;
     let proximaAtualizacaoBar;
@@ -107,48 +110,47 @@
     }
     var idSensorCerto = 0
     function exibirAquariosDoUsuario() {  
+        debugger
         var aquarios = JSON.parse(sessionStorage.SENSOR);
         aquarios.forEach(item => {
-            idSensorCerto = Number(item.idSensor)
-            document.getElementById("line").innerHTML += `
-                <div id="grafico${item.idSensor}" class="display-none container-grafico">
-                    <h3 class="tituloGraficos">
-                        <span id="tituloAquario${item.idSensor}">${item.tipoLeitura}</span>
-                    </h3>
-                    <div class="graph">
-                        <canvas id="myChartCanvas${item.idSensor}"></canvas>
-                    </div>
-                </div>
-            `
-            obterDadosGrafico(item.idSensor)
+                if(sensorId == item.idSensor){
+                    idSensorCerto = Number(item.idSensor)
+                    document.getElementById("line").innerHTML += `
+                        <div id="grafico${item.idSensor}" class="display-none container-grafico">
+                            <h3 class="tituloGraficos">
+                                <span id="tituloAquario${item.idSensor}">${item.tipoLeitura}</span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas${item.idSensor}"></canvas>
+                            </div>
+                        </div>
+                    `
+                    obterDadosGrafico(item.idSensor)
+
+            }
+           
         });
         if (aquarios.length > 0) {
-            exibirAquario(aquarios[0].idSensor)
+            exibirAquario(sensorId)
         }
     }
     
-    function alterarTitulo(idAquario) {
-        var tituloAquario = document.getElementById(`tituloAquario${idAquario}`)
-        var descricao = JSON.parse(sessionStorage.SENSOR).find(item => item.idSensor == idAquario).tipoLeitura;
-        tituloAquario.innerHTML = "Últimas medidas de <span style='color: #e6005a'>" + descricao + "</span>"
-    }
+    // function alterarTitulo(idAquario) {
+    //     var tituloAquario = document.getElementById(`tituloAquario${idAquario}`)
+    //     var descricao = JSON.parse(sessionStorage.SENSOR).find(item => item.idSensor == idAquario).tipoLeitura;
+    //     tituloAquario.innerHTML = "Últimas medidas de <span style='color: #e6005a'>" + descricao + "</span>"
+    // }
 
     function exibirAquario(idAquario) {
+        debugger    
         let todosOsGraficos = JSON.parse(sessionStorage.SENSOR);
         for (i = 0; i < todosOsGraficos.length; i++) {
-            if (todosOsGraficos[i].idSensor != idAquario) {
+            if (todosOsGraficos[i].idSensor == idAquario) {
                 let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].idSensor}`)
                 if (elementoAtual.classList.contains("display-block")) {
                     elementoAtual.classList.remove("display-block")
                 }
                 elementoAtual.classList.add("display-none")
-
-                // alterando estilo do botão
-                let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].idSensor}`)
-                if (btnAtual.classList.contains("btn-pink")) {
-                    btnAtual.classList.remove("btn-pink")
-                }
-                btnAtual.classList.add("btn-white")
             }
         }
 
@@ -159,7 +161,6 @@
     }
 
     function obterDadosGrafico(idAquario) {
-        alterarTitulo(idAquario)
         if (proximaAtualizacao != undefined) {
             clearTimeout(proximaAtualizacao);
         }
@@ -245,7 +246,6 @@
                     if (novoRegistro[0].dtLeitura_grafico == dados.labels[dados.labels.length - 1]) {
                         console.log("---------------------------------------------------------------")
                         console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
                         console.log("Horário do novo dado capturado:")
                         console.log(novoRegistro[0].dtLeitura_grafico)
                         console.log("Horário do último dado capturado:")
@@ -283,40 +283,35 @@
     function exibirAquariosDoUsuarioBar() {  
         var aquarios = JSON.parse(sessionStorage.SENSOR);
         aquarios.forEach(item => {
-            document.getElementById("bar").innerHTML = `
-                <div id="graficoBarra${item.idSensor}" class="display-none container-grafico">
-                    <h3 class="tituloGraficos">
-                        <span id="tituloAquario${item.idSensor}">${item.idSensor}</span>
-                    </h3>
-                    <div class="graphBar">
-                        <canvas id="myChartCanvasBar${item.idSensor}" class="grafico"></canvas>
+            if(sensorId == item.idSensor){
+                document.getElementById("bar").innerHTML = `
+                    <div id="graficoBarra${item.idSensor}" class="display-none container-grafico">
+                        <h3 class="tituloGraficos">
+                            <span id="tituloAquario${item.idSensor}">${item.idSensor}</span>
+                        </h3>
+                        <div class="graphBar">
+                            <canvas id="myChartCanvasBar${item.idSensor}" class="grafico"></canvas>
+                        </div>
                     </div>
-                </div>
-            `
-            obterDadosGraficoBar(item.idSensor)
+                `
+                obterDadosGraficoBar(item.idSensor)
+            }
         });
 
         if (aquarios.length > 0) {
-            exibirAquarioBar(aquarios[0].idSensor)
+            exibirAquarioBar(sensorId)
         }
     }
 
     function exibirAquarioBar(idAquario) {
         let todosOsGraficos = JSON.parse(sessionStorage.SENSOR);
         for (i = 0; i < todosOsGraficos.length; i++) {
-            if (todosOsGraficos[i].idSensor != idAquario) {
+            if (todosOsGraficos[i].idSensor == idAquario) {
                 let elementoAtual = document.getElementById(`graficoBarra${todosOsGraficos[i].idSensor}`)
                 if (elementoAtual.classList.contains("display-block")) {
                     elementoAtual.classList.remove("display-block")
                 }
                 elementoAtual.classList.add("display-none")
-
-                // alterando estilo do botão
-                let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].idSensor}`)
-                if (btnAtual.classList.contains("btn-pink")) {
-                    btnAtual.classList.remove("btn-pink")
-                }
-                btnAtual.classList.add("btn-white")
             }
         }
 
