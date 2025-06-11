@@ -17,9 +17,9 @@
 }
 
 .indicador {
-  width: 18%;
+  width: 24%;
   height: 100%;
-  background-color: #ccc;
+  background-color: #f0f0f0 ;
   color: #fff;
   font-weight: bold;
   display: flex;
@@ -54,7 +54,7 @@
 
 .meio-esquerda,
 .meio-direita {
-  background-color: #ccc;
+  background-color: #f0f0f0 ;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,7 +66,7 @@
 }
 
 .baixo {
-  background-color: #ccc;
+  background-color: #f0f0f0 ;
   display: flex;
   align-items: center;
   justify-content: center;

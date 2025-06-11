@@ -121,6 +121,11 @@ body {
 }
 
 /* pagina graficos */
+#btn-suporte{
+  width: fit-content;
+  padding: 0 20px 0 20px;
+  font-size: .8rem;
+}
 
 .dash-header {
   background-color: #212124;

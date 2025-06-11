@@ -90,7 +90,7 @@
   height: 40vh;
 }
 
-.imagemExemplo img{
+.imagemExemplo img {
   width: 100%;
   height: auto;
   border-radius: 15px;
@@ -120,6 +120,10 @@
 }
 
 .botoes a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   color: #fff;
   background-color: var(--verdeClaro);
   border: none;
@@ -129,4 +133,24 @@
   text-decoration: none;
   margin-left: 10px;
   font-size: 1.2rem;
+}
+
+footer img {
+  width: 400px;
+  height: auto;
+}
+
+.faleConosco a {
+  text-decoration: none;
+  width: 100%;
+}
+
+.faleConosco a p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--verdeClaro);
+  height: 40px;
+  border-radius: 10px;
+  color: #fff;
 }
