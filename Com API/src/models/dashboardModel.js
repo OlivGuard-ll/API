@@ -1,7 +1,7 @@
 var database = require("../database/config");
 
 function umidadeAtual(idSensor) {
-  var instrucaoSql = `	SELECT l.leitura  FROM leitura as l JOIN sensor as s ON l.fkSensor = idSensor
+  var instrucaoSql = `	SELECT l.leitura, s.localInstalacao as setor FROM leitura as l JOIN sensor as s ON l.fkSensor = idSensor
 		WHERE s.idSensor = ${idSensor}
 		ORDER BY l.dtLeitura DESC LIMIT 1;
 `;
@@ -55,7 +55,7 @@ function ultimaLeituraTempoReal(idSensor) {
 }
 
 function ultimaLeituraTempoRealCard(idEmpresa) {
-  var instrucaoSql = `SELECT s.idSensor, l.leitura
+  var instrucaoSql = `SELECT s.idSensor, l.leitura, l.dtLeitura, s.localInstalacao
           FROM sensor s
           JOIN leitura l ON s.idSensor = l.fkSensor
           WHERE s.fkEmpresa = ${idEmpresa}
@@ -64,6 +64,7 @@ function ultimaLeituraTempoRealCard(idEmpresa) {
                 FROM leitura l2
                 WHERE l2.fkSensor = s.idSensor
   );
+
 `;
   return database.executar(instrucaoSql);
 }

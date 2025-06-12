@@ -34,10 +34,6 @@
                 <p>Sensores</p>
             </a>
 
-            <a href="./dashboard.html">
-                <p>Gráficos</p>
-            </a>
-
             <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
             </div>
@@ -137,24 +133,33 @@
                     </div>
                     <div class="desc-aquario">
                         <div class="temperatura">
-                            <p id="idSensor_${item.idSensor}"><a href="dashboard.html?id=${item.idSensor}">Sensor ${item.idSensor}</a></p>
+                            <p id="idSensor_${item.idSensor}"><a href="dashboard.html?id=${item.idSensor}">Sensor (Setor: ${item.localInstalacao})</a></p>
                         </div>
                         <div class="cor-alerta" id="card_${item.idSensor}"></div>
                     </div>
                 </div>`;
-                const situacao = document.getElementById(`cardAquario_${item.idSensor}`);
-                if (item.leitura < 50 || item.leitura > 80) {
-                    situacao.classList.add('alerta');
-                } else if ((item.leitura >= 50 && item.leitura <= 55) || (item.leitura >= 75 && item.leitura <= 80)) {
-                    situacao.classList.add('atencao');
-                } else {
-                    situacao.classList.add('ideal');
-                }
+                let leitura = Number(item.leitura);
+                situacaoAtual(leitura, item.idSensor);
         });
+        setTimeout(() => exibirAquarios(), 2000);
     })
     .catch(err => {
         console.error("Erro ao buscar leituras:", err);
     });
+
+
+    function situacaoAtual(leitura, idSensor){
+                const situacao = document.getElementById(`cardAquario_${idSensor}`);
+                if (leitura < 50) {
+                    situacao.classList.add('alerta');
+                }else if (leitura > 80){
+                    situacao.classList.add('alerta');
+                }else if (leitura >= 55 && leitura <= 75) {
+                    situacao.classList.add('ideal');
+                } else {
+                    situacao.classList.add('atencao');
+                }
+        }
 }
 </script>
 

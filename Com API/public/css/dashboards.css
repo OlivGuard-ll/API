@@ -293,9 +293,10 @@ body {
 }
 
 .tituloGraficos {
-  color: rgb(216, 216, 216);
+  color: var(--verdeContraste);
   display: flex;
   justify-content: center;
+  font-size: 22px;
 }
 
 .btn-chart {

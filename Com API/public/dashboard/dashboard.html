@@ -42,10 +42,6 @@
                 <p>Sensores</p>
             </a>
 
-            <a href="./dashboard.html">
-                <p>Gráficos</p>
-            </a>
-
             <div class="btn-logout" onclick="limparSessao()">
                 <img src="../assets/img/logout.svg" alt="" srcset="">
                 <h3>Sair</h3>
@@ -60,6 +56,7 @@
     <div class="dash">
 
         <section class="indicadores">
+            <div id="setor" class="indicador">Setor:</div>
             <div id="umidadeAtual" class="indicador ideal">Umidade atual:</div>
             <div id="mediaDoDia" class="indicador ideal">Media do dia:</div>
             <div id="mediaTrintaDias" class="indicador alerta">Media últimos 30 dias:</div>
@@ -117,7 +114,7 @@
                     document.getElementById("line").innerHTML += `
                         <div id="grafico${item.idSensor}" class="display-none container-grafico">
                             <h3 class="tituloGraficos">
-                                <span id="tituloAquario${item.idSensor}">${item.tipoLeitura}</span>
+                                <span id="tituloAquario${item.idSensor}">Umidade do solo atual:</span>
                             </h3>
                             <div class="graph">
                                 <canvas id="myChartCanvas${item.idSensor}"></canvas>
@@ -286,7 +283,7 @@
                 document.getElementById("bar").innerHTML = `
                     <div id="graficoBarra${item.idSensor}" class="display-none container-grafico">
                         <h3 class="tituloGraficos">
-                            <span id="tituloAquario${item.idSensor}">${item.idSensor}</span>
+                            <span id="tituloAquario${item.idSensor}">Umidade do solo (Últimos 30 dias)</span>
                         </h3>
                         <div class="graphBar">
                             <canvas id="myChartCanvasBar${item.idSensor}" class="grafico"></canvas>
@@ -423,19 +420,22 @@
         }).then(res => res.json())
             .then(function (resposta){
                 var umidade = document.getElementById('umidadeAtual')
-                umidade.innerHTML = `${resposta[0].leitura}`
+                umidade.innerHTML = `Umidade atual: ${resposta[0].leitura}%`
                     var dadoAtual = resposta[0].leitura
                     situacaoAtual(dadoAtual)
+
+            var localInstalacao = document.getElementById('setor');
+            setor.innerHTML = `Setor: ${resposta[0].setor}`
             })
     }
      function situacaoAtual(dadoAtual){
         var situcao = document.getElementById('situacaoAtual')
         if(dadoAtual < 50 || dadoAtual > 80){
-            situcao.innerHTML = 'Crítico'
+            situcao.innerHTML = 'Situação atual: Crítico'
         }else if(dadoAtual <= 55 || dadoAtual >= 75){
-            situcao.innerHTML = 'Atenção'
+            situcao.innerHTML = 'Situação atual: Atenção'
         }else{
-            situcao.innerHTML = 'Ideal'
+            situcao.innerHTML = 'Situação atual: Ideal'
         }
     }
 
@@ -446,7 +446,7 @@
         }).then(res => res.json())
         .then(function (resposta){
             var mediaDoDia = document.getElementById('mediaDoDia');
-            mediaDoDia.innerHTML = `${resposta[0].media}`   
+            mediaDoDia.innerHTML = `Umidade média do dia: ${resposta[0].media}%`
         })
     }
 
@@ -457,7 +457,7 @@
         }).then(res => res.json())
         .then(function (resposta){
             var mediaTrintaDias = document.getElementById('mediaTrintaDias');
-            mediaTrintaDias.innerHTML = `${resposta[0].mediaUltimoTrintaDias}`   
+            mediaTrintaDias.innerHTML = `Media últimos 30 dias: ${resposta[0].mediaUltimoTrintaDias}%`   
         })
     }
 
