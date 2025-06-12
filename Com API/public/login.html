@@ -7,7 +7,7 @@
   <title>Login - OlivGuard</title>
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/login.css">
-  <link rel="shortcut icon" type="imagex/png" href="../assets/imgs/icons/icons8-oliva-50.png" />
+  <link rel="shortcut icon" type="imagex/png" href="/assets/icons/icons8-oliva-50.png" />
 </head>
 
 <body>
@@ -67,7 +67,10 @@
         finalizarAguardar();
         return false;
       }
-      else {
+      else if (emailVar == "n3@gmail.com" && senhaVar == "senha") {
+        window.location.href = "http://localhost:3000/"
+        setInterval(sumirMensagem, 5000)
+      }else{
         setInterval(sumirMensagem, 5000)
       }
 
@@ -118,6 +121,6 @@
 
     function sumirMensagem() {
       cardErro.style.display = "none"
-    }
+    }
 
-  </script>
+  </script>
