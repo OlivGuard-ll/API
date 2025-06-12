@@ -57,10 +57,10 @@
 
         <section class="indicadores">
             <div id="setor" class="indicador">Setor:</div>
-            <div id="umidadeAtual" class="indicador ideal">Umidade atual:</div>
-            <div id="mediaDoDia" class="indicador ideal">Media do dia:</div>
-            <div id="mediaTrintaDias" class="indicador alerta">Media últimos 30 dias:</div>
-            <div id="situacaoAtual" class="indicador atencao">Situação atual:</div>
+            <div id="umidadeAtual" class="indicador">Umidade atual:</div>
+            <div id="mediaDoDia" class="indicador">Media do dia:</div>
+            <div id="mediaTrintaDias" class="indicador">Media últimos 30 dias:</div>
+            <div id="situacaoAtual" class="indicador">Situação atual:</div>
         </section>
 
         <div class="container-meio">
@@ -68,8 +68,8 @@
             <div class="meio-direita">
                 <p class="exemplo faixa">◻️ Faixa de umidade recomendada: 50% a 80%</p>
                 <p class="exemplo ideal">✅ Ideal (50% a 80%)</p>
-                <p class="exemplo alerta">⚠️ Alerta (próximo do estágio atenção)</p>
-                <p class="exemplo atencao">❌ Atenção (<50% ou>80%)</p>
+                <p class="exemplo alerta">⚠️ Atenção (próximo do estágio de alerta)</p>
+                <p class="exemplo atencao">❌ Alerta (<50% ou >80%)</p>
             </div>
         </div>
 
@@ -421,21 +421,33 @@
             .then(function (resposta){
                 var umidade = document.getElementById('umidadeAtual')
                 umidade.innerHTML = `Umidade atual: ${resposta[0].leitura}%`
-                    var dadoAtual = resposta[0].leitura
-                    situacaoAtual(dadoAtual)
-
+                    var dadoAtual = resposta[0].leitura;
+                    
+                    if(dadoAtual < 50 || dadoAtual > 80){
+                            umidade.classList.add('atencao');
+                        }else if(dadoAtual <= 55 || dadoAtual >= 75){
+                                umidade.classList.add('alerta');
+                            }else{
+                                    umidade.classList.add('ideal');
+                                }
+                                
+                situacaoAtual1(dadoAtual)
             var localInstalacao = document.getElementById('setor');
             setor.innerHTML = `Setor: ${resposta[0].setor}`
             })
     }
-     function situacaoAtual(dadoAtual){
-        var situcao = document.getElementById('situacaoAtual')
+     function situacaoAtual1(dadoAtual){
+        var situcao = document.getElementById('situacaoAtual');
+        
         if(dadoAtual < 50 || dadoAtual > 80){
-            situcao.innerHTML = 'Situação atual: Crítico'
+            situcao.innerHTML = 'Situação atual: Alerta'
+            situacaoAtual.classList.add('atencao');
         }else if(dadoAtual <= 55 || dadoAtual >= 75){
             situcao.innerHTML = 'Situação atual: Atenção'
+            situacaoAtual.classList.add('alerta');
         }else{
             situcao.innerHTML = 'Situação atual: Ideal'
+            situacaoAtual.classList.add('ideal');
         }
     }
 
@@ -447,6 +459,15 @@
         .then(function (resposta){
             var mediaDoDia = document.getElementById('mediaDoDia');
             mediaDoDia.innerHTML = `Umidade média do dia: ${resposta[0].media}%`
+            var dadoAtual = resposta[0].media;
+        
+        if(dadoAtual < 50 || dadoAtual > 80){
+            mediaDoDia.classList.add('atencao');
+        }else if(dadoAtual <= 55 || dadoAtual >= 75){
+            mediaDoDia.classList.add('alerta');
+        }else{
+            mediaDoDia.classList.add('ideal');
+        }
         })
     }
 
@@ -457,8 +478,29 @@
         }).then(res => res.json())
         .then(function (resposta){
             var mediaTrintaDias = document.getElementById('mediaTrintaDias');
-            mediaTrintaDias.innerHTML = `Media últimos 30 dias: ${resposta[0].mediaUltimoTrintaDias}%`   
+            mediaTrintaDias.innerHTML = `Media últimos 30 dias: ${resposta[0].mediaUltimoTrintaDias}%`          
+            var dadoAtual = resposta[0].mediaUltimoTrintaDias;        
+        if(dadoAtual < 50 || dadoAtual > 80){
+            mediaTrintaDias.classList.add('atencao');
+        }else if(dadoAtual <= 55 || dadoAtual >= 75){
+            mediaTrintaDias.classList.add('alerta');
+        }else{
+            mediaTrintaDias.classList.add('ideal');
+        }
         })
     }
+
+    // function situacaoAtual(leitura, idSensor) {
+    //         const situacao = document.getElementById(`cardAquario_${idSensor}`);
+    //         if (leitura < 50) {
+    //             situacao.classList.add('atencao');
+    //         } else if (leitura > 80) {
+    //             situacao.classList.add('atencao');
+    //         } else if (leitura >= 55 && leitura <= 75) {
+    //             situacao.classList.add('ideal');
+    //         } else {
+    //             situacao.classList.add('alerta');
+    //         }
+    //     }
 
 </script>

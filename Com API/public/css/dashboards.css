@@ -215,25 +215,29 @@ body {
 }
 
 .cardAquario {
-  margin: 2%;
   width: 45%;
   flex-wrap: wrap;
   display: flex;
-  /* text-align: center; */
-  height: 180px;
+  text-align: center;
+  height: 25vh;
   /* justify-content: right; */
-  background-color: var(--verdeClaro);
+  background-color: transparent;
   font-size: 20px;
   border-radius: 10px;
   cursor: pointer;
   transition: .3s;
+  text-decoration: none;
+  color: #fff;
+  padding-bottom: 15px;
+}
+
+.cardAquario_id{
+  width: 90%;
 }
 
 .cardAquario:hover{
   transform: scale(1.03);
 }
-
-
 
 .cardAquario h1 {
   width: fit-content;
@@ -250,6 +254,11 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
+  padding-bottom: 15px;
+}
+
+.desc-aquario p{
   width: 100%;
 }
 
@@ -273,7 +282,7 @@ body {
 .umidade {
   margin: 5px;
   margin-left: 20px;
-  width: 75%;
+  width: 100%;
 }
 
 .cor-alerta {
