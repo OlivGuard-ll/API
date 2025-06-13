@@ -11,22 +11,10 @@ main {
   align-items: center;
   justify-content: center;
   min-height: 90vh;
-  max-height: fit-content;
   background-color: var(--verdeFundo);
   color: #fff;
   padding: 50px 0;
   gap: 15px;
-}
-
-.top {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-}
-
-.perguntas h1 {
-  margin-bottom: 20px;
 }
 
 .pergunta {
@@ -62,6 +50,7 @@ button {
   transition: 0.3s;
   margin-top: 25px;
 }
+
 button:hover {
   scale: 1.03;
 }
@@ -79,11 +68,10 @@ table {
   border: 1px solid #ffffff55;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.1); 
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
 }
 
 thead {
-  background-color: transparent;
   background-image: linear-gradient(135deg, var(--verdeClaro), #cbe949);
   color: #042222;
   font-weight: bold;
@@ -107,8 +95,7 @@ tbody tr:hover {
   transition: 0.3s;
 }
 
-#res2,
-#res3 {
+#res2 {
   background-color: var(--verdeContraste);
   color: #fff;
   padding: 25px;
@@ -122,18 +109,57 @@ tbody tr:hover {
 }
 
 #res2 b,
-#res3 b,
-#res3 strong {
+#res2 strong {
   color: var(--verdeClaro);
-}
-
-#res2 strong,
-#res3 strong {
   font-weight: bold;
 }
 
 #res,
-#res2,
-#res3 {
+#res2 {
   display: none;
 }
+
+.tooltip {
+  position: relative;
+  cursor: pointer;
+  z-index: 10;
+  white-space: normal;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  background: linear-gradient(135deg, var(--verdeClaro), #e8f57d);
+  color: var(--verdeEscuro);
+  padding: 10px 16px;
+  border-radius: 8px;
+  white-space: normal;
+  max-width: 300px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+  z-index: 1000;
+}
+
+
+.tooltip.tooltip-bottom::after {
+  top: 120%; 
+  bottom: auto;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+table {
+  overflow: visible; 
+}
+
