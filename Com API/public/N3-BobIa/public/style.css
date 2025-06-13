@@ -1,51 +1,100 @@
+:root {
+  --verdeEscuro: #042222;
+  --verdeClaro: #a5ce0c;
+  --verdeContraste: #092b2c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #63B1BC;
-    margin: 0;
-    padding: 0;
+  font-family: Arial;
+  background-color: var(--verdeContraste);
+  color: #fff;
+  margin: 0;
+  padding: 0;
 }
 
 #container {
-    width: 80%;
-    margin: 50px auto;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  gap: 15px;
 }
 
 h1 {
-    color: #1F2A44;
+  margin-top: 40px;
+  color: #fff;
 }
 
 textarea[type="text"] {
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 5px;
-    width: 400px;
+  padding: 8px;
+  font-size: 16px;
+  font-family: Arial;
+  color: #fff;
+  border: 2px solid var(--verdeClaro);
+  background-color: transparent;
+  border-radius: 5px;
+  width: 30vw;
+  max-width: 30vw;
+  height: 8vh;
+  transition: 0.3s;
+  box-shadow: -1px 1px 7px 1px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -1px 1px 7px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 1px 7px 1px rgba(0, 0, 0, 0.75);
+  margin-top: 20px;
+}
+
+textarea[type="text"]:focus {
+  transform: scale(1.01);
+  outline: none;
 }
 
 select,
 button {
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 button {
-    background-color: #ED145B;
-    color: #FFFFFF;
-    border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 30vw;
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid var(--verdeClaro);
+  font-weight: bold;
+  padding: 15px;
+  transition: 0.3s;
 }
 
 button:hover {
-    background-color: #EFB661;
+  background-color: #88a719;
+  border: 2px solid #88a719;
+  transform: scale(1.03);
 }
 
 #resposta {
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #D0D3D4;
-    border: 1px solid #63666A;
-    text-align: left;
-    display: none;
+  width: 30vw;
+  max-width: 30vw;
+  height: fit-content;
+  max-height: 35vh;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 2px solid var(--verdeClaro);
+  text-align: left;
+  display: none;
 }
