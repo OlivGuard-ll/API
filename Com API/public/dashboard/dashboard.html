@@ -422,6 +422,7 @@
                 var umidade = document.getElementById('umidadeAtual')
                 umidade.innerHTML = `Umidade atual: ${resposta[0].leitura}%`
                     var dadoAtual = resposta[0].leitura;
+                    umidade.classList.remove('atencao','alerta','ideal');
                     
                     if(dadoAtual < 50 || dadoAtual > 80){
                             umidade.classList.add('atencao');
@@ -438,6 +439,7 @@
     }
      function situacaoAtual1(dadoAtual){
         var situcao = document.getElementById('situacaoAtual');
+        situcao.classList.remove('atencao','alerta','ideal');
         
         if(dadoAtual < 50 || dadoAtual > 80){
             situcao.innerHTML = 'Situação atual: Alerta'
@@ -460,6 +462,7 @@
             var mediaDoDia = document.getElementById('mediaDoDia');
             mediaDoDia.innerHTML = `Umidade média do dia: ${resposta[0].media}%`
             var dadoAtual = resposta[0].media;
+            mediaDoDia.classList.remove('atencao','alerta','ideal');
         
         if(dadoAtual < 50 || dadoAtual > 80){
             mediaDoDia.classList.add('atencao');
@@ -479,7 +482,8 @@
         .then(function (resposta){
             var mediaTrintaDias = document.getElementById('mediaTrintaDias');
             mediaTrintaDias.innerHTML = `Media últimos 30 dias: ${resposta[0].mediaUltimoTrintaDias}%`          
-            var dadoAtual = resposta[0].mediaUltimoTrintaDias;        
+            var dadoAtual = resposta[0].mediaUltimoTrintaDias;   
+            mediaTrintaDias.classList.remove('atencao','alerta','ideal');     
         if(dadoAtual < 50 || dadoAtual > 80){
             mediaTrintaDias.classList.add('atencao');
         }else if(dadoAtual <= 55 || dadoAtual >= 75){
